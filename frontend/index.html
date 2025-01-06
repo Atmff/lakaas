@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ingatlanok Eladása</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>Ingatlanok Eladása</h1>
+    </header>
+    <main>
+        <section id="property-list">
+            <h2>Elérhető Ingatlanok</h2>
+            <div class="property" data-email="nemben431@hengersor.hu" data-phone="06-30-123-4567" data-name="Kovács Péter">
+                <img src="https://via.placeholder.com/300x200" alt="Budapest Szívében">
+                <h3>Ház Budapest Szívében</h3>
+                <p>Ár: 120,000,000 Ft</p>
+                <p>Helyszín: Budapest, V. kerület</p>
+                <button class="contact-button">Érdekel</button>
+            </div>
+            <div class="property" data-email="nemben431@hengersor.hu" data-phone="06-20-987-6543" data-name="Nagy Anna">
+                <img src="https://via.placeholder.com/300x200" alt="Balaton Partján">
+                <h3>Modern Lakás Balaton Partján</h3>
+                <p>Ár: 80,000,000 Ft</p>
+                <p>Helyszín: Siófok</p>
+                <button class="contact-button">Érdekel</button>
+            </div>
+        </section>
+        <section id="add-property">
+            <h2>Új Ingatlan Hozzáadása</h2>
+            <form id="property-form">
+                <label for="name">Név:</label>
+                <input type="text" id="name" required>
+                <label for="email">E-mail:</label>
+                <input type="email" id="email" required>
+                <label for="phone">Telefonszám:</label>
+                <input type="text" id="phone" required>
+                <label for="location">Helyszín:</label>
+                <input type="text" id="location" required>
+                <label for="price">Ár:</label>
+                <input type="number" id="price" required>
+                <label for="image-url">Kép URL:</label>
+                <input type="url" id="image-url" required>
+                <button type="submit">Hozzáadás</button>
+            </form>
+        </section>
+    </main>
+    <div id="popup" class="hidden">
+        <div class="popup-content">
+            <h3>Eladó Adatai</h3>
+            <p><strong>Név:</strong> <span id="popup-name"></span></p>
+            <p><strong>Telefonszám:</strong> <span id="popup-phone"></span></p>
+            <p><strong>E-mail:</strong> <span id="popup-email"></span></p>
+            <button id="close-popup">Bezárás</button>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
+
+
+
+
+
+
