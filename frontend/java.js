@@ -10,13 +10,22 @@ document.addEventListener("DOMContentLoaded", () => {
     // Új ingatlan hozzáadása
     propertyForm.addEventListener("submit", (e) => {
         e.preventDefault();
-        const name = document.getElementById("name").value;
-        const email = document.getElementById("email").value;
-        const phone = document.getElementById("phone").value;
-        const location = document.getElementById("location").value;
-        const price = document.getElementById("price").value;
-        const imageUrl = document.getElementById("image-url").value;
 
+        // Az űrlap mezők értékei
+        const name = document.getElementById("name").value.trim();
+        const email = document.getElementById("email").value.trim();
+        const phone = document.getElementById("phone").value.trim();
+        const location = document.getElementById("location").value.trim();
+        const price = document.getElementById("price").value.trim();
+        const imageUrl = document.getElementById("image-url").value.trim();
+
+        // Ellenőrzés: minden mező kitöltve
+        if (!name || !email || !phone || !location || !price || !imageUrl) {
+            alert("Kérlek, tölts ki minden mezőt!");
+            return;
+        }
+
+        // Új ingatlan HTML
         const propertyHTML = `
             <div class="property" data-name="${name}" data-email="${email}" data-phone="${phone}">
                 <img src="${imageUrl}" alt="${location}">
@@ -26,30 +35,30 @@ document.addEventListener("DOMContentLoaded", () => {
             </div>
         `;
 
+        // Hozzáadás a listához
         propertyList.insertAdjacentHTML("beforeend", propertyHTML);
-        propertyForm.reset();
 
-        attachEventListeners();
+        // Űrlap ürítése
+        propertyForm.reset();
     });
 
-    // Felugró mező megjelenítése
-    const attachEventListeners = () => {
-        const buttons = document.querySelectorAll(".contact-button");
-        buttons.forEach((button) => {
-            button.addEventListener("click", () => {
-                const property = button.closest(".property");
-                popupName.textContent = property.dataset.name;
-                popupPhone.textContent = property.dataset.phone;
-                popupEmail.textContent = property.dataset.email;
-                popup.classList.add("visible");
-            });
-        });
-    };
+    // Dinamikus eseménykezelés (event delegation)
+    propertyList.addEventListener("click", (e) => {
+        if (e.target.classList.contains("contact-button")) {
+            const property = e.target.closest(".property");
 
-    attachEventListeners();
+            if (!property) {
+                alert("Nem található az ingatlan adatai!");
+                return;
+            }
 
-    // Felugró mező bezárása
-    closePopupButton.addEventListener("click", () => {
-        popup.classList.remove("visible");
+            // Email írás link létrehozása
+            const email = property.dataset.email;
+            const subject = `Érdeklődés az ingatlan iránt (${property.querySelector("h3").textContent})`;
+            const body = `Tisztelt ${property.dataset.name},%0A%0AAz alábbi ingatlan iránt szeretnék érdeklődni:%0A%0AIngatlan: ${property.querySelector("h3").textContent}%0AÁr: ${property.querySelector("p").textContent}%0A%0AVárom visszajelzését.%0A%0AKöszönettel,%0A[Az Ön neve]`;
+
+            // Mailto link megnyitása
+            window.location.href = `mailto:${email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+        }
     });
 });
