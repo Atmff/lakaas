@@ -4,10 +4,11 @@ body {
     padding: 0;
     background-color: #eef2f3;
     color: #333;
+
 }
 
 header {
-    background-color: #1e88e5;
+    background-image: url(hater.jpg);
     color: white;
     text-align: center;
     padding: 1rem;
